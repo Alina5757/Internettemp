@@ -1,6 +1,7 @@
 package ustu.is.InternetLab.gsm.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,7 @@ public class GSM {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column()
+    @NotBlank(message = "Name can't be null or empty")
     private String Name;
 
     public GSM(){

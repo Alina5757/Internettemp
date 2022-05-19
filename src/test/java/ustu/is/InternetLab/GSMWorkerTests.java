@@ -8,10 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ustu.is.InternetLab.GSMWorker.model.GSMWorker;
+import ustu.is.InternetLab.GSMWorker.service.GSMWorkerNotFoundException;
 import ustu.is.InternetLab.GSMWorker.service.GSMWorkerService;
 import ustu.is.InternetLab.gsm.model.GSM;
+import ustu.is.InternetLab.gsm.service.GSMNotFoundException;
 import ustu.is.InternetLab.gsm.service.GSMService;
 import ustu.is.InternetLab.worker.model.Worker;
+import ustu.is.InternetLab.worker.service.WorkerNotFoundException;
 import ustu.is.InternetLab.worker.service.WorkerService;
 
 import javax.persistence.EntityNotFoundException;
@@ -28,6 +31,7 @@ public class GSMWorkerTests {
     @Autowired
     private GSMWorkerService gsmWorkerService;
 
+    //Заполнение таблиц
     @Test
     void testCreate() {
         gsmService.deleteAllGSMs();
@@ -67,92 +71,116 @@ public class GSMWorkerTests {
     }
 
     @Test
-    void testRead() {
-        gsmService.deleteAllGSMs();
-        final GSM gsm = gsmService.addGSM( "Бензин В-100");
-        log.info(gsm.toString());
-        final GSM finalGSM = gsmService.findGSM(gsm.getId());
-        log.info(finalGSM.toString());
-        Assertions.assertEquals(gsm, finalGSM);
-
+    void testWorkerCreate() {
         workerService.deleteAllWorkers();
-        final Worker worker = workerService.addWorker( "Иван", "Антонов");
+        final Worker worker = workerService.addWorker("Иван", "Иванов");
         log.info(worker.toString());
-        final Worker finalWorker = workerService.findWorker(worker.getId());
-        log.info(finalWorker.toString());
-        Assertions.assertEquals(worker, finalWorker);
-
-        gsmWorkerService.deleteAllGSMWorkers();
-        final GSMWorker gsmworker = gsmWorkerService.addGSMWorker(gsm.getId(), worker.getId());
-        log.info(gsmworker.toString());
-        final GSMWorker finalGSMWorker = gsmWorkerService.findGSMWorker(gsmworker.getId());
-        log.info(finalGSMWorker.toString());
-        Assertions.assertEquals(gsmworker, finalGSMWorker);
+        Assertions.assertNotNull(worker.getId());
     }
 
     @Test
-    void testGSMReadNotFound() {
-        gsmService.deleteAllGSMs();
-        Assertions.assertThrows(EntityNotFoundException.class, () -> gsmService.findGSM(-1L));
+    void testWorkerRead() {
+        workerService.deleteAllWorkers();
+        final Worker worker = workerService.addWorker("Иван", "Иванов");
+        log.info(worker.toString());
+        final Worker findWorker = workerService.findWorker(worker.getId());
+        log.info(findWorker.toString());
+        Assertions.assertEquals(worker, findWorker);
     }
 
     @Test
     void testWorkerReadNotFound() {
         workerService.deleteAllWorkers();
-        Assertions.assertThrows(EntityNotFoundException.class, () -> workerService.findWorker(-1L));
+        Assertions.assertThrows(WorkerNotFoundException.class, () -> workerService.findWorker(-1L));
     }
 
     @Test
-    void testGSMWorkerReadNotFound() {
-        gsmWorkerService.deleteAllGSMWorkers();
-        Assertions.assertThrows(EntityNotFoundException.class, () -> gsmWorkerService.findGSMWorker(-1L));
+    void testWorkerReadAll() {
+        workerService.deleteAllWorkers();
+        workerService.addWorker("Иван", "Иванов");
+        workerService.addWorker("Петр", "Петров");
+        final List<Worker> workers = workerService.findAllWorkers();
+        log.info(workers.toString());
+        Assertions.assertEquals(workers.size(), 2);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+
+    @Test
+    void testGSMCreate() {
+        gsmService.deleteAllGSMs();
+        final GSM gsm = gsmService.addGSM("Бензин А-100");
+        log.info(gsm.toString());
+        Assertions.assertNotNull(gsm.getId());
+    }
+
+    @Test
+    void testGSMRead() {
+        gsmService.deleteAllGSMs();
+        final GSM gsm = gsmService.addGSM("Бензин А-102");
+        log.info(gsm.toString());
+        final GSM findGSM = gsmService.findGSM(gsm.getId());
+        log.info(findGSM.toString());
+        Assertions.assertEquals(gsm, findGSM);
+    }
+
+    @Test
+    void testGSMReadNotFound() {
+        gsmService.deleteAllGSMs();
+        Assertions.assertThrows(GSMNotFoundException.class, () -> gsmService.findGSM(-1L));
     }
 
     @Test
     void testGSMReadAll() {
         gsmService.deleteAllGSMs();
-        gsmService.addGSM("Бензин А-1");
-        gsmService.addGSM("Бензин А-2");
+        gsmService.addGSM("Бензин В-100");
+        gsmService.addGSM("Бензин В-102");
         final List<GSM> gsms = gsmService.findAllGSMs();
         log.info(gsms.toString());
         Assertions.assertEquals(gsms.size(), 2);
+    }
 
-        workerService.deleteAllWorkers();
-        workerService.addWorker("Михаил", "Чернов");
-        workerService.addWorker("Дмитрий", "Антонов");
-        final List<Worker> workers = workerService.findAllWorkers();
-        log.info(workers.toString());
-        Assertions.assertEquals(workers.size(), 2);
+    /////////////////////////////////////////////////////////////////////////////////////////
 
+    @Test
+    void testGSMWorkerCreate() {
         gsmWorkerService.deleteAllGSMWorkers();
-        gsmWorkerService.addGSMWorker((long) 1, (long) 2);
-        gsmWorkerService.addGSMWorker((long) 1, (long) 2);
-        final List<GSMWorker> gsmWorkers = gsmWorkerService.findAllGSMWorkers();
-        log.info(gsmWorkers.toString());
-        Assertions.assertEquals(gsmWorkers.size(), 2);
+        GSM gsm1 = gsmService.addGSM("Бензин А-1");
+        Worker worker1 = workerService.addWorker("Иван", "Иванов");
+        final GSMWorker gsmworker = gsmWorkerService.addGSMWorker(gsm1.getId(), worker1.getId());
+        log.info(gsmworker.toString());
+        Assertions.assertNotNull(gsmworker.getId());
     }
 
     @Test
-    void testGSMReadAllEmpty() {
-        gsmService.deleteAllGSMs();
-        final List<GSM> gsms = gsmService.findAllGSMs();
-        log.info(gsms.toString());
-        Assertions.assertEquals(gsms.size(), 0);
-    }
-
-    @Test
-    void testWorkerReadAllEmpty() {
-        workerService.deleteAllWorkers();
-        final List<Worker> workers = workerService.findAllWorkers();
-        log.info(workers.toString());
-        Assertions.assertEquals(workers.size(), 0);
-    }
-
-    @Test
-    void testGSMWorkerReadAllEmpty() {
+    void testGSMWorkerRead() {
         gsmWorkerService.deleteAllGSMWorkers();
+        final GSM gsm1 = gsmService.addGSM("Бензин А-1");
+        final Worker worker1 = workerService.addWorker("Иван", "Иванов");
+        final GSMWorker gsmWorker = gsmWorkerService.addGSMWorker(gsm1.getId(), worker1.getId());
+        log.info(gsmWorker.toString());
+        final GSMWorker findGSMWorker = gsmWorkerService.findGSMWorker(gsmWorker.getId());
+        log.info(findGSMWorker.toString());
+        Assertions.assertEquals(gsmWorker, findGSMWorker);
+    }
+
+    @Test
+    void testGSMWorkerReadNotFound() {
+        gsmWorkerService.deleteAllGSMWorkers();
+        Assertions.assertThrows(GSMWorkerNotFoundException.class, () -> gsmWorkerService.findGSMWorker(-1L));
+    }
+
+    @Test
+    void testGSMWorkerReadAll() {
+        gsmWorkerService.deleteAllGSMWorkers();
+        final GSM gsm1 = gsmService.addGSM("Бензин А-1");
+        final Worker worker1 = workerService.addWorker("Иван", "Иванов");
+        gsmWorkerService.addGSMWorker(gsm1.getId(), worker1.getId());
+        final GSM gsm2 = gsmService.addGSM("Бензин А-30");
+        final Worker worker2 = workerService.addWorker("Семен", "Семенович");
+        gsmWorkerService.addGSMWorker(gsm2.getId(), worker2.getId());
         final List<GSMWorker> gsmworkers = gsmWorkerService.findAllGSMWorkers();
         log.info(gsmworkers.toString());
-        Assertions.assertEquals(gsmworkers.size(), 0);
+        Assertions.assertEquals(gsmworkers.size(), 2);
     }
 }

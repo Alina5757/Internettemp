@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.NotBlank;
 import  java.util.Objects;
 
 @Entity
@@ -13,7 +14,9 @@ public class Worker {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column()
+    @NotBlank(message = "Firstname can't be null or empty")
     private String firstName;
+    @NotBlank(message = "Lastname can't be null or empty")
     private String lastName;
 
     public Worker(){

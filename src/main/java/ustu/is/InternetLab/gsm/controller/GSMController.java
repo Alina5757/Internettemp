@@ -17,28 +17,30 @@ public class GSMController {
     }
 
     @GetMapping("/{id}")
-    public GSM getGSM(@PathVariable Long id){
-        return gsmService.findGSM(id);
+    public GSMDto getGSM(@PathVariable Long id){
+        return new GSMDto(gsmService.findGSM(id));
     }
 
     @GetMapping("/")
-    public List<GSM> getGSMs(){
-        return gsmService.findAllGSMs();
+    public List<GSMDto> getGSMs(){
+        return gsmService.findAllGSMs().stream()
+                .map(GSMDto::new)
+                .toList();
     }
 
     @PostMapping("/")
-    public GSM createGSM(@RequestParam("Name") String Name){
-        return gsmService.addGSM(Name);
+    public GSMDto createGSM(@RequestParam("Name") String Name){
+        return new GSMDto(gsmService.addGSM(Name));
     }
 
     @PatchMapping("/{id}")
-    public GSM updateGSM(@PathVariable Long id,
+    public GSMDto updateGSM(@PathVariable Long id,
                          @RequestParam("Name") String Name){
-        return gsmService.updateGSM(id, Name);
+        return new GSMDto(gsmService.updateGSM(id, Name));
     }
 
     @DeleteMapping("/{id}")
-    public GSM deleteGSM(@PathVariable Long id){
-        return gsmService.deleteGSM(id);
+    public GSMDto deleteGSM(@PathVariable Long id){
+        return new GSMDto(gsmService.deleteGSM(id));
     }
 }

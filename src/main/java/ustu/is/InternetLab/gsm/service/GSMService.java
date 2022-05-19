@@ -4,61 +4,60 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import ustu.is.InternetLab.gsm.model.GSM;
+import ustu.is.InternetLab.gsm.repository.GSMRepository;
+import ustu.is.InternetLab.util.validation.ValidatorUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GSMService {
-    @PersistenceContext
-    private EntityManager em;
+    private final GSMRepository gsmRepository;
+    private final ValidatorUtil validatorUtil;
+
+    public GSMService(GSMRepository gsmRepository, ValidatorUtil validatorUtil) {
+        this.gsmRepository = gsmRepository;
+        this.validatorUtil = validatorUtil;
+    }
 
     @Transactional
     public GSM addGSM (String Name){
-        if (!StringUtils.hasText(Name)){
-            throw new IllegalArgumentException("GSM name is null or empty");
-        }
         final GSM gsm = new GSM(Name);
-        em.persist(gsm);
-        return gsm;
+        validatorUtil.validate(gsm);
+        return gsmRepository.save(gsm);
     }
 
     @Transactional(readOnly = true)
     public GSM findGSM(Long id){
-        final GSM gsm = em.find(GSM.class, id);
-        if (gsm == null){
-            throw new EntityNotFoundException(String.format("GSM with id [%s] is not found", id));
-        }
-        return  gsm;
+        final Optional<GSM> gsm = gsmRepository.findById(id);
+        return gsm.orElseThrow(() -> new GSMNotFoundException(id));
     }
 
     @Transactional(readOnly = true)
     public List<GSM> findAllGSMs(){
-        return em.createQuery("select g from GSM g", GSM.class)
-                .getResultList();
+        return gsmRepository.findAll();
     }
 
     @Transactional
     public GSM updateGSM(Long id, String Name){
-        if (!StringUtils.hasText(Name)){
-            throw new IllegalArgumentException("GSM name is null or empty");
-        }
         final GSM currentGSM = findGSM(id);
         currentGSM.setName(Name);
-        return em.merge(currentGSM);
+        validatorUtil.validate(currentGSM);
+        return gsmRepository.save(currentGSM);
     }
 
     @Transactional
     public GSM deleteGSM(Long id){
         final GSM currentGSM = findGSM(id);
-        em.remove(currentGSM);
+        gsmRepository.delete(currentGSM);
         return currentGSM;
     }
 
     @Transactional
     public void deleteAllGSMs(){
-        em.createQuery("delete from GSM").executeUpdate();
+        gsmRepository.deleteAll();
     }
 }

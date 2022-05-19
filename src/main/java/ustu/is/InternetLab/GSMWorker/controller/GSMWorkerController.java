@@ -16,30 +16,32 @@ public class GSMWorkerController {
     }
 
     @GetMapping("/{id}")
-    public GSMWorker getGSMWorker(@PathVariable Long id){
-        return GSMworkerService.findGSMWorker(id);
+    public GSMWorkerDto getGSMWorker(@PathVariable Long id){
+        return new GSMWorkerDto(GSMworkerService.findGSMWorker(id));
     }
 
     @GetMapping("/")
-    public List<GSMWorker> getGSMWorkers(){
-        return GSMworkerService.findAllGSMWorkers();
+    public List<GSMWorkerDto> getGSMWorkers(){
+        return GSMworkerService.findAllGSMWorkers().stream()
+                .map(GSMWorkerDto::new)
+                .toList();
     }
 
     @PostMapping("/")
-    public GSMWorker createGSMWorker(@RequestParam("IdGSM") Long IdGSM,
+    public GSMWorkerDto createGSMWorker(@RequestParam("IdGSM") Long IdGSM,
                                @RequestParam("IdWorker") Long IdWorker){
-        return GSMworkerService.addGSMWorker(IdGSM, IdWorker);
+        return new GSMWorkerDto(GSMworkerService.addGSMWorker(IdGSM, IdWorker));
     }
 
     @PatchMapping("/{id}")
-    public GSMWorker updateGSMWorker(@PathVariable Long id,
+    public GSMWorkerDto updateGSMWorker(@PathVariable Long id,
                                @RequestParam("IdGSM") Long IdGSM,
                                @RequestParam("IdWorker") Long IdWorker){
-        return GSMworkerService.updateGSMWorker(id, IdGSM, IdWorker);
+        return new GSMWorkerDto(GSMworkerService.updateGSMWorker(id, IdGSM, IdWorker));
     }
 
     @DeleteMapping("/{id}")
-    public GSMWorker deleteGSMWorker(@PathVariable Long id){
-        return GSMworkerService.deleteGSMWorker(id);
+    public GSMWorkerDto deleteGSMWorker(@PathVariable Long id){
+        return new GSMWorkerDto(GSMworkerService.deleteGSMWorker(id));
     }
 }

@@ -17,30 +17,32 @@ public class WorkerController {
     }
 
     @GetMapping("/{id}")
-    public Worker getWorker(@PathVariable Long id){
-        return workerService.findWorker(id);
+    public WorkerDto getWorker(@PathVariable Long id){
+        return new WorkerDto(workerService.findWorker(id));
     }
 
     @GetMapping("/")
-    public List<Worker> getWorkers(){
-        return workerService.findAllWorkers();
+    public List<WorkerDto> getWorkers(){
+        return workerService.findAllWorkers().stream()
+                .map(WorkerDto::new)
+                .toList();
     }
 
     @PostMapping("/")
-    public Worker createWorker(@RequestParam("firstName") String firstName,
+    public WorkerDto createWorker(@RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName){
-        return workerService.addWorker(firstName, lastName);
+        return new WorkerDto(workerService.addWorker(firstName, lastName));
     }
 
     @PatchMapping("/{id}")
-    public Worker updateWorker(@PathVariable Long id,
+    public WorkerDto updateWorker(@PathVariable Long id,
                                @RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName){
-        return workerService.updateWorker(id, firstName, lastName);
+        return new WorkerDto(workerService.updateWorker(id, firstName, lastName));
     }
 
     @DeleteMapping("/{id}")
-    public Worker deleteWorker(@PathVariable Long id){
-        return workerService.deleteWorker(id);
+    public WorkerDto deleteWorker(@PathVariable Long id){
+        return new WorkerDto(workerService.deleteWorker(id));
     }
 }

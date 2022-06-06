@@ -1,9 +1,8 @@
 package ustu.is.InternetLab.gsm.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ustu.is.InternetLab.WebConfiguration;
+import ustu.is.InternetLab.configuration.WebConfiguration;
 import ustu.is.InternetLab.gsm.service.GSMService;
-import ustu.is.InternetLab.gsm.model.GSM;
 
 import javax.validation.Valid;
 import java.util.List;

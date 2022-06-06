@@ -27,5 +27,4 @@ public class GSMWorkerDto {
         return IdWorker;
     }
     public void setIdWorker(Long Idworker) { this.IdWorker = Idworker; }
-
 }

@@ -1,7 +1,7 @@
 package ru.ulstu.is.sbapp.gsm.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.ulstu.is.sbapp.WebConfiguration;
+import ru.ulstu.is.sbapp.configuration.WebConfiguration;
 import ru.ulstu.is.sbapp.gsm.service.GSMService;
 
 import javax.validation.Valid;

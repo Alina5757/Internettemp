@@ -1,11 +1,8 @@
 package ru.ulstu.is.sbapp.GSMWorker.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.ulstu.is.sbapp.GSMWorker.model.GSMWorker;
 import ru.ulstu.is.sbapp.GSMWorker.service.GSMWorkerService;
-import ru.ulstu.is.sbapp.WebConfiguration;
-import ru.ulstu.is.sbapp.gsm.controller.GSMDto;
-import ru.ulstu.is.sbapp.worker.controller.WorkerDto;
+import ru.ulstu.is.sbapp.configuration.WebConfiguration;
 
 import javax.validation.Valid;
 import java.util.List;

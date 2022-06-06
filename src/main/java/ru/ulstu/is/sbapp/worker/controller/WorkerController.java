@@ -1,8 +1,7 @@
 package ru.ulstu.is.sbapp.worker.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.ulstu.is.sbapp.WebConfiguration;
-import ru.ulstu.is.sbapp.student.controller.StudentDto;
+import ru.ulstu.is.sbapp.configuration.WebConfiguration;
 import ru.ulstu.is.sbapp.worker.service.WorkerService;
 
 import javax.validation.Valid;

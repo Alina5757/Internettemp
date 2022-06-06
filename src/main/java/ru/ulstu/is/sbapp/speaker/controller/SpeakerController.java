@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ulstu.is.sbapp.WebConfiguration;
+import ru.ulstu.is.sbapp.configuration.WebConfiguration;
 import ru.ulstu.is.sbapp.speaker.service.SpeakerService;
 
 @RestController

@@ -1,13 +1,15 @@
 package ustu.is.InternetLab.gsm.controller;
 
 import org.springframework.web.bind.annotation.*;
+import ustu.is.InternetLab.WebConfiguration;
 import ustu.is.InternetLab.gsm.service.GSMService;
 import ustu.is.InternetLab.gsm.model.GSM;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gsm")
+@RequestMapping(WebConfiguration.REST_API + "/gsm")
 public class GSMController {
     private  final GSMService gsmService;
 
@@ -21,22 +23,22 @@ public class GSMController {
         return new GSMDto(gsmService.findGSM(id));
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<GSMDto> getGSMs(){
         return gsmService.findAllGSMs().stream()
                 .map(GSMDto::new)
                 .toList();
     }
 
-    @PostMapping("/")
-    public GSMDto createGSM(@RequestParam("Name") String Name){
-        return new GSMDto(gsmService.addGSM(Name));
+    @PostMapping
+    public GSMDto createGSM(@RequestParam("name") String name){
+        return new GSMDto(gsmService.addGSM(name));
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public GSMDto updateGSM(@PathVariable Long id,
-                         @RequestParam("Name") String Name){
-        return new GSMDto(gsmService.updateGSM(id, Name));
+                         @RequestBody @Valid GSMDto gsmDto){
+        return new GSMDto(gsmService.updateGSM(id, gsmDto.getName()));
     }
 
     @DeleteMapping("/{id}")

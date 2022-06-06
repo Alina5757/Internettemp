@@ -11,13 +11,13 @@ public class GSM {
     private Long id;
     @Column()
     @NotBlank(message = "Name can't be null or empty")
-    private String Name;
+    private String name;
 
     public GSM(){
     }
 
-    public GSM(String Name) {
-        this.Name = Name;
+    public GSM(String name) {
+        this.name = name;
     }
 
     public Long getId(){
@@ -25,11 +25,11 @@ public class GSM {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String Name) {
-        this.Name = Name;
+        this.name = name;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class GSM {
     public String toString(){
         return "GSM{" +
                 "id=" + id +
-                ", Name='" + Name + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

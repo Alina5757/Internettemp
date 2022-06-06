@@ -6,12 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import ustu.is.InternetLab.util.validation.ValidationException;
 import ustu.is.InternetLab.worker.service.WorkerNotFoundException;
 
 import java.util.stream.Collectors;
 
-@ControllerAdvice
+@ControllerAdvice(annotations = RestController.class)
 public class AdviceController {
     @ExceptionHandler({
             WorkerNotFoundException.class,

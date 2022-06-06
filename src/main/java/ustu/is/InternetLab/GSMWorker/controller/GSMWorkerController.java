@@ -3,11 +3,13 @@ package ustu.is.InternetLab.GSMWorker.controller;
 import org.springframework.web.bind.annotation.*;
 import ustu.is.InternetLab.GSMWorker.model.GSMWorker;
 import ustu.is.InternetLab.GSMWorker.service.GSMWorkerService;
+import ustu.is.InternetLab.WebConfiguration;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gsmWorker")
+@RequestMapping(WebConfiguration.REST_API + "/gsmWorker")
 public class GSMWorkerController {
     private  final GSMWorkerService GSMworkerService;
 
@@ -20,24 +22,23 @@ public class GSMWorkerController {
         return new GSMWorkerDto(GSMworkerService.findGSMWorker(id));
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<GSMWorkerDto> getGSMWorkers(){
         return GSMworkerService.findAllGSMWorkers().stream()
                 .map(GSMWorkerDto::new)
                 .toList();
     }
 
-    @PostMapping("/")
+    @PostMapping
     public GSMWorkerDto createGSMWorker(@RequestParam("IdGSM") Long IdGSM,
                                @RequestParam("IdWorker") Long IdWorker){
         return new GSMWorkerDto(GSMworkerService.addGSMWorker(IdGSM, IdWorker));
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public GSMWorkerDto updateGSMWorker(@PathVariable Long id,
-                               @RequestParam("IdGSM") Long IdGSM,
-                               @RequestParam("IdWorker") Long IdWorker){
-        return new GSMWorkerDto(GSMworkerService.updateGSMWorker(id, IdGSM, IdWorker));
+                                        @RequestBody @Valid GSMWorkerDto gsmworkerDto){
+        return new GSMWorkerDto(GSMworkerService.updateGSMWorker(id, gsmworkerDto.getIdGSM(), gsmworkerDto.getIdWorker()));
     }
 
     @DeleteMapping("/{id}")

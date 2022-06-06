@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <p th:text="${calculate}"/>
+    <form action="#" th:action="@{/calc}" method="get">
+        <div class="mb-3">
+            <label for="name" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="name" th:name="name" th:value="${name}" required="true">
+            <label for="a" class="form-label">1 Число</label>
+            <input type="text" class="form-control" id="a" th:name="a" th:value="${a}" required="true">
+            <label for="b" class="form-label">2 Число</label>
+            <input type="text" class="form-control" id="b" th:name="b" th:value="${b}" required="true">
+        </div>
+        <div class="mb-3">
+            <label for="operation" class="form-label">Язык</label>
+            <select id="operation" class="form-select" th:name="operation">
+                <option th:each="value: ${operates}" th:selected="${operation} == ${value}">
+                    <span th:text="${value}"></span>
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+</body>
+</html>

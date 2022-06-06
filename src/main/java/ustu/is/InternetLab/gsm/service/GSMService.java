@@ -24,8 +24,8 @@ public class GSMService {
     }
 
     @Transactional
-    public GSM addGSM (String Name){
-        final GSM gsm = new GSM(Name);
+    public GSM addGSM (String name){
+        final GSM gsm = new GSM(name);
         validatorUtil.validate(gsm);
         return gsmRepository.save(gsm);
     }
@@ -42,9 +42,9 @@ public class GSMService {
     }
 
     @Transactional
-    public GSM updateGSM(Long id, String Name){
+    public GSM updateGSM(Long id, String name){
         final GSM currentGSM = findGSM(id);
-        currentGSM.setName(Name);
+        currentGSM.setName(name);
         validatorUtil.validate(currentGSM);
         return gsmRepository.save(currentGSM);
     }

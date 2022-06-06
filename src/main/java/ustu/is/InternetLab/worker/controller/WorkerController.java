@@ -1,8 +1,7 @@
 package ustu.is.InternetLab.worker.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ustu.is.InternetLab.WebConfiguration;
-import ustu.is.InternetLab.worker.model.Worker;
+import ustu.is.InternetLab.configuration.WebConfiguration;
 import ustu.is.InternetLab.worker.service.WorkerService;
 
 import javax.validation.Valid;

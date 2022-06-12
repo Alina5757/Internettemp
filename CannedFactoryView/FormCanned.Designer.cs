@@ -137,7 +137,7 @@ namespace CannedFactoryView
             // dataGridViewComponents
             // 
             this.dataGridViewComponents.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridViewComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewComponents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnID,
             this.ColumnName,
@@ -146,6 +146,7 @@ namespace CannedFactoryView
             this.dataGridViewComponents.Location = new System.Drawing.Point(6, 22);
             this.dataGridViewComponents.Name = "dataGridViewComponents";
             this.dataGridViewComponents.ReadOnly = true;
+            this.dataGridViewComponents.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewComponents.RowTemplate.Height = 25;
             this.dataGridViewComponents.Size = new System.Drawing.Size(380, 306);
             this.dataGridViewComponents.TabIndex = 0;

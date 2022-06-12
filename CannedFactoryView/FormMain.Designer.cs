@@ -39,6 +39,8 @@ namespace CannedFactoryView
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemComponents = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCanneds = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemWarehouses = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemFillWarhouse = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -46,10 +48,11 @@ namespace CannedFactoryView
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Location = new System.Drawing.Point(12, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(816, 346);
             this.dataGridView1.TabIndex = 0;
@@ -107,7 +110,8 @@ namespace CannedFactoryView
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.ToolStripMenuItemFillWarhouse});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1045, 24);
@@ -118,7 +122,8 @@ namespace CannedFactoryView
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemComponents,
-            this.ToolStripMenuItemCanneds});
+            this.ToolStripMenuItemCanneds,
+            this.ToolStripMenuItemWarehouses});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(94, 20);
             this.toolStripMenuItem1.Text = "Справочники";
@@ -136,6 +141,20 @@ namespace CannedFactoryView
             this.ToolStripMenuItemCanneds.Size = new System.Drawing.Size(192, 22);
             this.ToolStripMenuItemCanneds.Text = "Список изделий";
             this.ToolStripMenuItemCanneds.Click += new System.EventHandler(this.ToolStripMenuItemCanneds_Click);
+            // 
+            // ToolStripMenuItemWarehouses
+            // 
+            this.ToolStripMenuItemWarehouses.Name = "ToolStripMenuItemWarehouses";
+            this.ToolStripMenuItemWarehouses.Size = new System.Drawing.Size(192, 22);
+            this.ToolStripMenuItemWarehouses.Text = "Список складов";
+            this.ToolStripMenuItemWarehouses.Click += new System.EventHandler(this.ToolStripMenuItemWarehouses_Click);
+            // 
+            // ToolStripMenuItemFillWarhouse
+            // 
+            this.ToolStripMenuItemFillWarhouse.Name = "ToolStripMenuItemFillWarhouse";
+            this.ToolStripMenuItemFillWarhouse.Size = new System.Drawing.Size(115, 20);
+            this.ToolStripMenuItemFillWarhouse.Text = "Пополнить склад";
+            this.ToolStripMenuItemFillWarhouse.Click += new System.EventHandler(this.ToolStripMenuItemFillWarhouse_Click);
             // 
             // FormMain
             // 
@@ -173,5 +192,7 @@ namespace CannedFactoryView
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemComponents;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCanneds;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemWarehouses;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFillWarhouse;
     }
 }

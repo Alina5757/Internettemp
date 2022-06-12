@@ -12,8 +12,7 @@ namespace CannedFactoryListImplement.Implements
     {
         private readonly DataListSingleton source;
 
-        public ComponentStorage()
-        {
+        public ComponentStorage() {
             source = DataListSingleton.GetInstance();
         }
 
@@ -54,8 +53,7 @@ namespace CannedFactoryListImplement.Implements
 
             foreach (var component in source.Components)
             {
-                if (component.Id == model.Id
-                    || component.ComponentName == model.ComponentName)
+                if (component.Id == model.Id || component.ComponentName == model.ComponentName)
                 {
                     return CreateModel(component);
                 }

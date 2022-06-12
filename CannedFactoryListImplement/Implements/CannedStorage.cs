@@ -11,49 +11,63 @@ namespace CannedFactoryListImplement.Implements
     public class CannedStorage : ICannedStorage
     {
         private readonly DataListSingleton source;
+
         public CannedStorage() {
             source = DataListSingleton.GetInstance();
         }
 
-        public List<CannedViewModel> GetFullList() {
+        public List<CannedViewModel> GetFullList() 
+        {
             var result = new List<CannedViewModel>();
-            foreach (var component in source.Canneds) {
+            foreach (var component in source.Canneds)
+            {
                 result.Add(CreateModel(component));
             }
             return result;
         }
 
-        public List<CannedViewModel> GetFilteredList(CannedBindingModel model) {
-            if (model == null) {
+        public List<CannedViewModel> GetFilteredList(CannedBindingModel model) 
+        {
+            if (model == null) 
+            {
                 return null;
             }
 
             var result = new List<CannedViewModel>();
-            foreach (var canned in source.Canneds) {
-                if (canned.CannedName.Contains(model.CannedName)) {
+            foreach (var canned in source.Canneds) 
+            {
+                if (canned.CannedName.Contains(model.CannedName)) 
+                {
                     result.Add(CreateModel(canned));
                 }
             }
             return result;
         }
 
-        public CannedViewModel GetElement(CannedBindingModel model) {
-            if (model == null) {
+        public CannedViewModel GetElement(CannedBindingModel model) 
+        {
+            if (model == null) 
+            {
                 return null;
             }
-            foreach (var canned in source.Canneds) {
-                if (canned.Id == model.Id || canned.CannedName == model.CannedName) {
+            
+            foreach (var canned in source.Canneds) 
+            {
+                if (canned.Id == model.Id || canned.CannedName == model.CannedName) 
+                {
                     return CreateModel(canned);
                 }
             }
             return null;
         }
 
-        public void Insert(CannedBindingModel model) {
-            var tempCanned = new Canned { Id = 1,
-                CannedComponents = new Dictionary<int, int>() };
-            foreach (var canned in source.Canneds) {
-                if (canned.Id >= tempCanned.Id) {
+        public void Insert(CannedBindingModel model) 
+        {
+            var tempCanned = new Canned { Id = 1, CannedComponents = new Dictionary<int, int>() };
+            foreach (var canned in source.Canneds) 
+            {
+                if (canned.Id >= tempCanned.Id) 
+                {
                     tempCanned.Id = canned.Id + 1;
                 }
             }
@@ -101,10 +115,12 @@ namespace CannedFactoryListImplement.Implements
             foreach (var component in model.CannedComponents) {
                 if (canned.CannedComponents.ContainsKey(component.Key))
                 {
-                    canned.CannedComponents[component.Key] = model.CannedComponents[component.Key].Item2;
+                    canned.CannedComponents[component.Key] = 
+                        model.CannedComponents[component.Key].Item2;
                 }
                 else {
-                    canned.CannedComponents.Add(component.Key, model.CannedComponents[component.Key].Item2);
+                    canned.CannedComponents.Add(component.Key, 
+                        model.CannedComponents[component.Key].Item2);
                 }
             }
             return canned;

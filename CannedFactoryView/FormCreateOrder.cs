@@ -25,8 +25,8 @@ namespace CannedFactoryView
                 comboBoxCanned.DataSource = list;
                 comboBoxCanned.SelectedItem = null;
             }
-        }
-        
+        }              
+
         private void CalcSum() { 
             if(comboBoxCanned.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
             {

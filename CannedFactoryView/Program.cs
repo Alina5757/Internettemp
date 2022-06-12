@@ -1,11 +1,12 @@
 using CannedFactoryBusinessLogic.BusinessLogics;
 using CannedFactoryContracts.BusinessLogicsContracts;
 using CannedFactoryContracts.StoragesContracts;
-using CannedFactoryListImplement.Implements;
+using CannedFactoryFileImplement.Implements;
 using System;
 using Unity;
 using Unity.Lifetime;
 using System.Windows.Forms;
+using CannedFactoryFileImplement;
 
 namespace CannedFactoryView
 {
@@ -22,9 +23,10 @@ namespace CannedFactoryView
         static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
+            Application.EnableVisualStyles();            
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
+            FileDataListSingleton.GetInstance().SaveMeth();
         }
 
         private static IUnityContainer BuildUnityContainer() {

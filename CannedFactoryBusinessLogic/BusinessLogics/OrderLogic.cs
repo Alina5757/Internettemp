@@ -39,7 +39,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                 Count = model.Count,
                 Sum = model.Sum,
                 Status = CannedFactoryContracts.Enums.OrderStatus.Принят,
-                DateCreate = DateTime.Now
+                DateCreate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             });
             if (element != null)
             {
@@ -50,7 +50,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                 Count = model.Count,
                 Sum = model.Sum,
                 Status = CannedFactoryContracts.Enums.OrderStatus.Принят,
-                DateCreate = DateTime.Now
+                DateCreate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             });
         }
 
@@ -132,7 +132,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                     Sum = element.Sum,
                     Status = OrderStatus.Выдан,
                     DateCreate = element.DateCreate,
-                    DateImplement = DateTime.Now
+                    DateImplement = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
                 });
             }
         }

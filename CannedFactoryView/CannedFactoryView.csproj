@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CannedFactoryBusinessLogic\CannedFactoryBusinessLogic.csproj" />
+    <ProjectReference Include="..\CannedFactoryFileImplement\CannedFactoryFileImplement.csproj" />
     <ProjectReference Include="..\CannedFactoryListImplement\CannedFactoryListImplement.csproj" />
   </ItemGroup>
 

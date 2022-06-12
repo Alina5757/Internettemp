@@ -104,6 +104,6 @@ namespace CannedFactoryView
         private void buttonRefact_Click(object sender, EventArgs e)
         {
             LoadData();
-        }
+        }        
     }
 }

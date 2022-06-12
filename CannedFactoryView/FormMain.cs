@@ -105,5 +105,17 @@ namespace CannedFactoryView
         {
             LoadData();
         }
+
+        private void ToolStripMenuItemWarehouses_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
+
+        private void ToolStripMenuItemFillWarhouse_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormFillWarehouse>();
+            form.ShowDialog();
+        }
     }
 }

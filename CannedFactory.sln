@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30503.244
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CannedFactoryBusinessLogic", "CannedFactoryBusinessLogic\CannedFactoryBusinessLogic.csproj", "{6C9C260C-C012-4868-BD0C-6A309CBBA81F}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CannedFactoryContracts", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CannedFactoryListImplement", "CannedFactoryListImplement\CannedFactoryListImplement.csproj", "{05B32A28-E931-485C-8F42-0CDC120461ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CannedFactoryView", "CannedFactoryView\CannedFactoryView.csproj", "{C8ED34C5-BA2C-4312-8160-4ECCE57DFB82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CannedFactoryView", "CannedFactoryView\CannedFactoryView.csproj", "{C8ED34C5-BA2C-4312-8160-4ECCE57DFB82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CannedFactoryFileImplement", "CannedFactoryFileImplement\CannedFactoryFileImplement.csproj", "{7F57E869-6B45-4438-AEDE-1E8853743127}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C8ED34C5-BA2C-4312-8160-4ECCE57DFB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8ED34C5-BA2C-4312-8160-4ECCE57DFB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8ED34C5-BA2C-4312-8160-4ECCE57DFB82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F57E869-6B45-4438-AEDE-1E8853743127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F57E869-6B45-4438-AEDE-1E8853743127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F57E869-6B45-4438-AEDE-1E8853743127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F57E869-6B45-4438-AEDE-1E8853743127}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,16 +20,21 @@ namespace CannedFactoryFileImplement
 
         private readonly string CannedFileName = "Canned.xml";
 
+        private readonly string WarehouseFileName = "Warehouse.xml";
+
         public List<Component> Components { get; set; }
 
         public List<Order> Orders { get; set; }
 
         public List<Canned> Canneds { get; set; }
 
+        public List<Warehouse> Warehouses { get; set; }
+
         private FileDataListSingleton() {
             Components = LoadComponents();
             Orders = LoadOrders();
             Canneds = LoadCanneds();
+            Warehouses = LoadWarehouses();
         }
 
         public static FileDataListSingleton GetInstance() {
@@ -44,6 +49,7 @@ namespace CannedFactoryFileImplement
             SaveComponents();
             SaveOrders();
             SaveCanneds();
+            SaveWarehouses();
         }
         
         private List<Component> LoadComponents() {
@@ -103,6 +109,36 @@ namespace CannedFactoryFileImplement
                         CannedName = elem.Element("CannedName").Value,
                         Price = Convert.ToDecimal(elem.Element("Price").Value),
                         CannedComponents = cannComp
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<Warehouse> LoadWarehouses()
+        {
+            var list = new List<Warehouse>();
+            if (File.Exists(WarehouseFileName))
+            {
+                var xDocument = XDocument.Load(WarehouseFileName);
+                var xElements = xDocument.Root.Elements("Warehouse").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    var storComp = new Dictionary<int, int>();
+                    foreach (var component in
+                        elem.Element("StoredComponents").Elements("StoredComponent").ToList())
+                    {
+                        storComp.Add(Convert.ToInt32(component.Element("Key").Value),
+                            Convert.ToInt32(component.Element("Value").Value));
+                    }
+                    list.Add(new Warehouse
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        Name = elem.Element("Name").Value,
+                        FIOChief = elem.Element("FIOChief").Value,
+                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
+                        StoredComponents = storComp
                     });
                 }
             }
@@ -169,6 +205,34 @@ namespace CannedFactoryFileImplement
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(CannedFileName);
             }
-        }        
+        }
+
+        private void SaveWarehouses()
+        {
+            if (Warehouses != null)
+            {
+                var xElement = new XElement("Warehouses");
+
+                foreach (var warehouse in Warehouses)
+                {
+                    var storElement = new XElement("StoredComponents");
+                    foreach (var component in warehouse.StoredComponents)
+                    {
+                        storElement.Add(new XElement("StoredComponent",
+                            new XElement("Key", component.Key),
+                            new XElement("Value", component.Value)));
+                    }
+                    xElement.Add(new XElement("Warehouse",
+                        new XAttribute("Id", warehouse.Id),
+                        new XElement("Name", warehouse.Name),
+                        new XElement("FIOChief", warehouse.FIOChief),
+                        new XElement("DateCreate", warehouse.DateCreate),
+                        storElement));
+                }
+
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(WarehouseFileName);
+            }
+        }
     }
 }

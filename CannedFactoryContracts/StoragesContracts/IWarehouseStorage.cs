@@ -21,5 +21,7 @@ namespace CannedFactoryContracts.StoragesContracts
         void Update(WarehouseBindingModel model);
 
         void Delete(WarehouseBindingModel model);
+
+        bool TakeComponents(Dictionary<int, (string, int)> components, int count);
     }
 }

@@ -12,10 +12,14 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+        private readonly IWarehouseStorage _warehouseStorage;
+        private readonly ICannedStorage _cannedStorage;
 
-        public OrderLogic(IOrderStorage orderStorage)
+        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage, ICannedStorage cannedStorage)
         {
             _orderStorage = orderStorage;
+            _warehouseStorage = warehouseStorage;
+            _cannedStorage = cannedStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -66,6 +70,11 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
             }
             if (element.Status != OrderStatus.Принят.ToString()) {
                 throw new Exception("Заказ не в статусе 'Принят'");
+            }
+            if (!_warehouseStorage.TakeComponents(_cannedStorage.GetElement(
+                new CannedBindingModel { Id = element.CannedId }).CannedComponents, element.Count))
+            {
+                throw new Exception("Недостаточно компонентов на складах");
             }
             if (element.Status == OrderStatus.Принят.ToString()) {
                 _orderStorage.Update(new OrderBindingModel

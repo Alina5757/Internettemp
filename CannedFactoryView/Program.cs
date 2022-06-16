@@ -1,7 +1,7 @@
 using CannedFactoryBusinessLogic.BusinessLogics;
 using CannedFactoryContracts.BusinessLogicsContracts;
 using CannedFactoryContracts.StoragesContracts;
-using CannedFactoryFileImplement.Implements;
+using CannedFactoryDatabaseImplement.Implements;
 using System;
 using Unity;
 using Unity.Lifetime;

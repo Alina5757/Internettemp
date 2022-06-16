@@ -40,8 +40,8 @@ namespace CannedFactoryFileImplement.Implements
                 return null;
             }
             var canned = source.Canneds
-            .FirstOrDefault(rec => rec.CannedName == model.CannedName ||
-            rec.Id == model.Id);
+            .FirstOrDefault(rec => rec.CannedName == model.CannedName || rec.Id
+           == model.Id);
             return canned != null ? CreateModel(canned) : null;
         }
         public void Insert(CannedBindingModel model)
